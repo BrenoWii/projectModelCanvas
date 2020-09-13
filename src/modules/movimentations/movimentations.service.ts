@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Movimentation } from 'src/entities/movimentation.entitiy';
 @Injectable()
 export class MovimentationsService {
     getAllMovimentations(): string[]{

@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule,TypeOrmModuleAsyncOptions  } from '@nestjs/typeorm';
-import {User} from './entities/user.entity'
-import {Movimentation} from './entities/movimentation.entitiy'
+import {User} from './modules/users/user.entity'
+import {Movimentation} from './modules/movimentations/movimentation.entitiy'
 
 import { UsersModule } from './modules/users/users.module'
 import { MovimentationsModule } from './modules/movimentations/movimentations.module';
@@ -16,7 +16,6 @@ import { ConfigModule, ConfigService } from './modules/configuration';
       imports:[ConfigModule],
       inject: [ConfigService],
       useFactory:(configService: ConfigService) => {
-        console.log(configService.get('DB_TYPE'))
         return {
           type: configService.get('DB_TYPE'),
           host: configService.get('DB_HOST'),
