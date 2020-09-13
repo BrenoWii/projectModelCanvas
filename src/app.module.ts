@@ -1,26 +1,33 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
-import { Movimentation } from './entities/movimentation.entitiy';
-import { User } from './entities/user.entity';
-
+import { TypeOrmModule,TypeOrmModuleAsyncOptions  } from '@nestjs/typeorm';
+import {User} from './entities/user.entity'
+import {Movimentation} from './entities/movimentation.entitiy'
 
 import { UsersModule } from './modules/users/users.module'
 import { MovimentationsModule } from './modules/movimentations/movimentations.module';
+import { ConfigModule, ConfigService } from './modules/configuration';
+
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'adm',
-      password: '35157595',
-      database: 'fluxodecaixa',
-      entities: [User, Movimentation],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports:[ConfigModule],
+      inject: [ConfigService],
+      useFactory:(configService: ConfigService) => {
+        console.log(configService.get('DB_TYPE'))
+        return {
+          type: configService.get('DB_TYPE'),
+          host: configService.get('DB_HOST'),
+          port: configService.get('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
+          entities: [User,Movimentation],
+          synchronize: configService.isEnv('dev')
+        } as TypeOrmModuleAsyncOptions;
+      }
     }),
     UsersModule,
     MovimentationsModule,

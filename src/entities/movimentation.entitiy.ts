@@ -17,6 +17,7 @@ export class Movimentation {
     type:string;
 
     @OneToOne(type => User)
+    @JoinColumn()
     user: User
 
 }
