@@ -8,6 +8,10 @@ import {Movimentation} from './modules/movimentations/movimentation.entitiy'
 import { UsersModule } from './modules/users/users.module'
 import { MovimentationsModule } from './modules/movimentations/movimentations.module';
 import { ConfigModule, ConfigService } from './modules/configuration';
+import { PlanOfBillsModule } from './modules/plan-of-bills/plan-of-bills.module';
+import { ClassificationModule } from './modules/classification/classification.module';
+import { Classification } from './modules/classification/classification.entity';
+import { PlanOfBills } from './modules/plan-of-bills/plan-of-bills.entity';
 
 
 @Module({
@@ -23,13 +27,15 @@ import { ConfigModule, ConfigService } from './modules/configuration';
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [User,Movimentation],
+          entities: [User,Movimentation, Classification, PlanOfBills],
           synchronize: configService.isEnv('dev')
         } as TypeOrmModuleAsyncOptions;
       }
     }),
     UsersModule,
     MovimentationsModule,
+    PlanOfBillsModule,
+    ClassificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

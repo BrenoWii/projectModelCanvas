@@ -1,5 +1,6 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
+import { PlanOfBills } from '../plan-of-bills/plan-of-bills.entity';
 import { User } from '../users/user.entity';
 
 @Entity()
@@ -13,8 +14,11 @@ export class Movimentation {
     @Column()
     value:number
 
-    @Column()
-    type:string;
+    @ManyToOne(type => PlanOfBills, planOfBills => planOfBills.movimentations)
+    planOfBill: PlanOfBills;
+
+    @Column({nullable: false})
+    payDate: Date;
 
     @OneToOne(type => User)
     @JoinColumn()
