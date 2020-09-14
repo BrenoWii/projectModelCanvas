@@ -5,19 +5,19 @@ import { User } from '../users/user.entity';
 
 @Entity()
 export class Movimentation {
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({nullable: false})
     date: Date;
 
-    @Column()
+    @Column({nullable: false})
     value:number
 
     @ManyToOne(type => PlanOfBills, planOfBills => planOfBills.movimentations)
     planOfBill: PlanOfBills;
 
-    @Column({nullable: false})
+    @Column({nullable: true})
     payDate: Date;
 
     @OneToOne(type => User)

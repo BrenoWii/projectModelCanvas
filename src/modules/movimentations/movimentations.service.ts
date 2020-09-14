@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateMovimentationDto } from './dto';
+import { Movimentation } from './movimentation.entitiy';
 @Injectable()
 export class MovimentationsService {
-    getAllMovimentations(): string[]{
-        return ['movimmentation', 'movimentation2']
-
+    constructor(@InjectRepository(Movimentation)private readonly movimentationRepo: Repository<Movimentation>){}
+    async getAllMovimentations(): Promise<Movimentation[]>{
+        return this.movimentationRepo.find()
     }
-
-    getMovimentationById(id: number): string{
-        return 'Movimentation' +id
-
+    async getMovimentationById(id: number): Promise<Movimentation>{
+        return this.movimentationRepo.findOne(id)
+    }
+    async create(movimentation: CreateMovimentationDto): Promise<Movimentation>{
+        return await this.movimentationRepo.save(this.movimentationRepo.create(movimentation))
     }
 }
