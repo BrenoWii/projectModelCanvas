@@ -1,7 +1,7 @@
 import { type } from 'os';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Classification } from '../classification/classification.entity';
-import { Movimentation } from '../movimentations/movimentation.entitiy';
+import { Movimentation } from '../movimentations/movimentation.entity';
 
 @Entity({
   name: 'plan-of-bills',

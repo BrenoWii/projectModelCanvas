@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
     constructor(private readonly userService: UsersService) {}
 
@@ -19,6 +19,6 @@ export class UsersController {
 
     @Post()
     async create(@Body() createUserDto: CreateUserDto) {
-      this.userService.create(createUserDto);
+      return await this.userService.create(createUserDto);
     }
 }

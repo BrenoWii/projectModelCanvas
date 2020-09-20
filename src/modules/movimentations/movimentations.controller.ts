@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
-import { Movimentation } from './movimentation.entitiy';
+import { Movimentation } from './movimentation.entity';
 import { MovimentationsService } from './movimentations.service';
 import { CreateMovimentationDto } from './dto'
 

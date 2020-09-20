@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Movimentation } from '../movimentations/movimentation.entitiy';
 import { CreatePlanOfBillsDto } from './dto';
 import { PlanOfBills } from './plan-of-bills.entity';
 

@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PasswordTransformer } from './password.transformer';
 
 @Entity({
   name: 'users',
@@ -16,8 +17,13 @@ export class User {
   @Column()
   email: string;
   
-  @Column()
+  @Column({
+    nullable:false,
+    length: 255,
+    transformer: new PasswordTransformer(),
+  })
   password: string;
+  
 
   @CreateDateColumn()
   @UpdateDateColumn()

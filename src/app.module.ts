@@ -2,16 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule,TypeOrmModuleAsyncOptions  } from '@nestjs/typeorm';
-import {User} from './modules/users/user.entity'
-import {Movimentation} from './modules/movimentations/movimentation.entitiy'
 
-import { UsersModule } from './modules/users/users.module'
-import { MovimentationsModule } from './modules/movimentations/movimentations.module';
 import { ConfigModule, ConfigService } from './modules/configuration';
-import { PlanOfBillsModule } from './modules/plan-of-bills/plan-of-bills.module';
-import { ClassificationModule } from './modules/classification/classification.module';
-import { Classification } from './modules/classification/classification.entity';
-import { PlanOfBills } from './modules/plan-of-bills/plan-of-bills.entity';
+
+import { User, UsersModule, MovimentationsModule, PlanOfBillsModule,PlanOfBills, ClassificationModule, Classification, Movimentation, AuthModule} from './modules'
 
 
 @Module({
@@ -32,6 +26,7 @@ import { PlanOfBills } from './modules/plan-of-bills/plan-of-bills.entity';
         } as TypeOrmModuleAsyncOptions;
       }
     }),
+    AuthModule,
     UsersModule,
     MovimentationsModule,
     PlanOfBillsModule,
