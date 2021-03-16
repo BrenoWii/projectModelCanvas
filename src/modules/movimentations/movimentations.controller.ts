@@ -1,19 +1,20 @@
-import { Controller, Get, Param, Post, Body, UseGuards, } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards,Request } from '@nestjs/common';
 import { Movimentation } from './movimentation.entity';
 import { JwtAuthGuard } from '../auth/jwt-guard';
 import { MovimentationsService } from './movimentations.service';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateMovimentationDto } from './dto'
 
+@UseGuards(JwtAuthGuard)
 @Controller('api/movimentations')
 export class MovimentationsController {
     constructor (private readonly movimentationService:MovimentationsService) {}
 
-    @UseGuards(JwtAuthGuard)
+   
     @Get()
     getAllMovimentations(): Promise<Movimentation[]> {
         return this.movimentationService.getAllMovimentations()
     }
-
 
     @Get(':id')
     getMovimentationById(@Param('id') id): Promise<Movimentation> {
@@ -21,7 +22,8 @@ export class MovimentationsController {
     }
 
     @Post()
-    async create(@Body() createMovimentationDto: CreateMovimentationDto) {
-      this.movimentationService.create(createMovimentationDto);
+    async create(@Request() request, @Body() createMovimentationDto: CreateMovimentationDto) {
+        createMovimentationDto.user = request.user.id
+        return this.movimentationService.create(createMovimentationDto);
     }
 }

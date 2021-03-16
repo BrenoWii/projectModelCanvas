@@ -7,7 +7,7 @@ import { Movimentation } from './movimentation.entity';
 export class MovimentationsService {
     constructor(@InjectRepository(Movimentation)private readonly movimentationRepo: Repository<Movimentation>){}
     async getAllMovimentations(): Promise<Movimentation[]>{
-        return this.movimentationRepo.find()
+        return this.movimentationRepo.find({relations: ['planOfBill']})
     }
     async getMovimentationById(id: number): Promise<Movimentation>{
         return this.movimentationRepo.findOne(id)

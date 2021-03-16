@@ -11,4 +11,8 @@ export class PlanOfBillsService {
     async create(planOfBills: CreatePlanOfBillsDto): Promise<PlanOfBills>{
         return await this.planOfBillsRepo.save(this.planOfBillsRepo.create(planOfBills))
     }
+    
+    async getPlanOfBills(){
+        return await this.planOfBillsRepo.find()
+    }
 }

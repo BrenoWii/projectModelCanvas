@@ -1,5 +1,5 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne, JoinTable } from 'typeorm';
 import { PlanOfBills } from '../plan-of-bills/plan-of-bills.entity';
 import { User } from '../users/user.entity';
 
@@ -21,7 +21,6 @@ export class Movimentation {
     payDate: Date;
 
     @OneToOne(type => User)
-    @JoinColumn()
     user: User
 
 }

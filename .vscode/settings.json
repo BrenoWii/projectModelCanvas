@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "Teste",
+            "group": "postgres",
+            "database": "fluxodecaixa",
+            "username": "postgres"
+        }
+    ]
+}

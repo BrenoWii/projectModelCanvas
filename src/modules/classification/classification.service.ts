@@ -12,4 +12,9 @@ export class ClassificationService {
         return await this.classificationRepo.save(this.classificationRepo.create(classification))
     }
 
+    async getClassifications(): Promise<Classification[]>{
+        return await this.classificationRepo.find()
+    }
+
+
 }
